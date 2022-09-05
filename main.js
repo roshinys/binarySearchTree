@@ -55,12 +55,37 @@ class BST {
       return node;
     }
   }
+  recursivePreorder(node) {
+    if (node === null) {
+      return;
+    }
+    console.log(node.val);
+    this.recursivePreorder(node.left);
+    this.recursivePreorder(node.right);
+  }
+  iterativePreorder(node) {
+    var stack = [node];
+    var res = [];
+    while (stack.length > 0) {
+      var curr = stack.pop();
+      res.push(curr.val);
+      if (curr.right !== null) {
+        stack.push(curr.right);
+      }
+      if (curr.left !== null) {
+        stack.push(curr.left);
+      }
+    }
+    return res;
+  }
 }
 bst = new BST();
 bst.insert(2);
 bst.insert(3);
 bst.insert(1);
 var root = bst.getrootNode();
-console.log(root);
-bst.inorder(root);
-console.log(bst.search(root, 1));
+// console.log(root);
+// bst.inorder(root);
+// console.log(bst.search(root, 1));
+console.log(bst.iterativePreorder(root));
+bst.recursivePreorder(root);
